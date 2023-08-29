@@ -1,37 +1,13 @@
 import $ from 'jquery';
-function getSymbolIndicator(Arr, n) {
-  try {
-    //code goes here
-    let x = 0,
-      y = 0,
-      z = null,
-      len = Arr.length;
-    if (n >= len) {
-      while (n >= y) {
-        x++;
-        $.each(Arr, function (ind, sym) {
-          if (n == y) {
-            z = sym;
-            return false;
-          } else {
-            y++;
-          }
-        });
-        if (y == 500 || (n == y && z != null)) {
-          break;
-        }
-      }
-      let out = Array(x + 1).join(z);
-      return out;
-    } else {
-      return Arr[n];
-    }
-  } catch (err) {
-    console.warn(err.message);
-  }
-}
 
 var M_SCOPE = {
+  ORG: {
+    FootNoteSymbols: ['*', '†', '‡', '§', '‖', '¶', '#'],
+    FootNoteSymbols_III: ['*', '†', '‡', '**', '††', '‡‡'],
+    z_symbols: ['*', '†', '‡', '§', '¶', '‖'],
+    z_symbols_II: ['*', '†', '‡', '‖', '§', '¶'],
+    z_FNChar: ['*', '$', '†', '‡', '§', '¶', '‖', '**', '††', '‡‡', '§§'],
+  },
   ArabicNumber: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
   FootNoteSymbols: ['*', '†', '‡', '§', '‖', '¶', '#'],
   FootNoteSymbol_II: [
@@ -80,18 +56,24 @@ var M_SCOPE = {
   },
   label_Generator: function (n, _ = {}) {
     try {
-      n = 35;
+      n = 25;
       for (let Count = 0; Count < n; Count++) {
-        for (const [name, valuesArr] of Object.entries(M_SCOPE)) {
-          if (name.match(/symbol/gi) && typeof valuesArr == 'object') {            
+        for (const [name, valuesArr] of Object.entries(M_SCOPE.ORG)) {
+          if(name =="FootNoteSymbol_II"){
+            //console.log(name.match(/symbol/gi))
+            console.log(typeof valuesArr == 'object')
+          }
+          if (name.match(/symbol/gi) && typeof valuesArr == 'object') {
+            //console.log(name);
             let newValue = this.label_Symbol(valuesArr, Count);
-            if (valuesArr.indexOf(newValue) == -1) {
-              valuesArr.push(newValue);
+            //console.log(newValue);
+            if (M_SCOPE[name].indexOf(newValue) == -1) {
+              M_SCOPE[name].push(newValue);
             }
           }
         }
       }
-      console.log(M_SCOPE);
+      console.log(M_SCOPE.FootNoteSymbols);
     } catch (err) {
       console.warn(err.message);
     }
