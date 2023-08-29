@@ -42,8 +42,11 @@ var M_SCOPE = {
       for (const [name, valuesArr] of Object.entries(M_SCOPE)) {
         if (name.match(/symbol/gi) && typeof valuesArr == 'object') {
           if (!M_SCOPE.CLONE_COPY['_' + name]) {
-            M_SCOPE.CLONE_COPY['_' + name] = valuesArr;
+            M_SCOPE.CLONE_COPY['_' + name] = [...valuesArr];
           }
+          console.log([name, valuesArr])
+          console.log(M_SCOPE.CLONE_COPY['_' + name]);
+
         }
         for (let Count = 0; Count < n; Count++) {
           if (name.match(/symbol/gi) && typeof valuesArr == 'object') {
