@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 var M_SCOPE = {
-  ORG: {},
+  CLONE_COPY: {},
   ArabicNumber: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
   FootNoteSymbols: ['*', '†', '‡', '§', '‖', '¶', '#'],
   FootNoteSymbol_II: ['*', '†', '‡', '‖', '$', '¶'],
@@ -39,15 +39,23 @@ var M_SCOPE = {
   label_Generator: function (n, _ = {}) {
     try {
       n = 25;
-      for (let Count = 0; Count < n; Count++) {
-        for (const [name, valuesArr] of Object.entries(M_SCOPE.ORG)) {
+      for (const [name, valuesArr] of Object.entries(M_SCOPE)) {
+        if (name.match(/symbol/gi) && typeof valuesArr == 'object') {
+          if (!_.M_SCOPE.CLONE_COPY['_' + name]) {
+            _.M_SCOPE.CLONE_COPY['_' + name] = valuesArr;
+          }
+        }
+        for (let Count = 0; Count < n; Count++) {
           if (name == 'FootNoteSymbol_II') {
             //console.log(name.match(/symbol/gi))
             console.log(typeof valuesArr == 'object');
           }
           if (name.match(/symbol/gi) && typeof valuesArr == 'object') {
             //console.log(name);
-            let newValue = this.label_Symbol(valuesArr, Count);
+            let newValue = this.label_Symbol(
+              _.M_SCOPE.CLONE_COPY['_' + name],
+              Count
+            );
             //console.log(newValue);
             if (M_SCOPE[name].indexOf(newValue) == -1) {
               M_SCOPE[name].push(newValue);
