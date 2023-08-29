@@ -1,34 +1,16 @@
 import $ from 'jquery';
 
 var M_SCOPE = {
-  ORG: {
-    FootNoteSymbols: ['*', '†', '‡', '§', '‖', '¶', '#'],
-    FootNoteSymbols_III: ['*', '†', '‡', '**', '††', '‡‡'],
-    z_symbols: ['*', '†', '‡', '§', '¶', '‖'],
-    z_symbols_II: ['*', '†', '‡', '‖', '§', '¶'],
-    z_FNChar: ['*', '$', '†', '‡', '§', '¶', '‖', '**', '††', '‡‡', '§§'],
-  },
+  ORG: {},
   ArabicNumber: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
   FootNoteSymbols: ['*', '†', '‡', '§', '‖', '¶', '#'],
-  FootNoteSymbol_II: [
-    '†',
-    '‡',
-    '‖',
-    '$',
-    '¶',
-    '**',
-    '††',
-    '‡‡',
-    '‖‖',
-    '§§',
-    '¶¶',
-  ],
+  FootNoteSymbol_II: ['*', '†', '‡', '‖', '$', '¶'],
   // ? *,†,‡,**,††,‡‡ ==> INTTEC - 07_JULY_23_YA
   FootNoteSymbols_III: ['*', '†', '‡', '**', '††', '‡‡'],
   z_symbols: ['*', '†', '‡', '§', '¶', '‖'],
   // ? Order: *,†,‡,||,$,¶,**,††,‡‡,||||,$$,¶¶ - YA JVCULT- 21_JUNNE-2023
   z_symbols_II: ['*', '†', '‡', '‖', '§', '¶'],
-  z_FNChar: ['*', '$', '†', '‡', '§', '¶', '‖', '**', '††', '‡‡', '§§'],
+  z_FNChar: ['*', '$', '†', '‡', '§', '¶', '‖'],
   IsAftercomma: false,
   label_Symbol: function (Arr, n, _ = {}) {
     try {
@@ -59,9 +41,9 @@ var M_SCOPE = {
       n = 25;
       for (let Count = 0; Count < n; Count++) {
         for (const [name, valuesArr] of Object.entries(M_SCOPE.ORG)) {
-          if(name =="FootNoteSymbol_II"){
+          if (name == 'FootNoteSymbol_II') {
             //console.log(name.match(/symbol/gi))
-            console.log(typeof valuesArr == 'object')
+            console.log(typeof valuesArr == 'object');
           }
           if (name.match(/symbol/gi) && typeof valuesArr == 'object') {
             //console.log(name);
