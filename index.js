@@ -41,29 +41,24 @@ var M_SCOPE = {
       n = 25;
       for (const [name, valuesArr] of Object.entries(M_SCOPE)) {
         if (name.match(/symbol/gi) && typeof valuesArr == 'object') {
-          if (!_.M_SCOPE.CLONE_COPY['_' + name]) {
-            _.M_SCOPE.CLONE_COPY['_' + name] = valuesArr;
+          if (!M_SCOPE.CLONE_COPY['_' + name]) {
+            M_SCOPE.CLONE_COPY['_' + name] = valuesArr;
           }
         }
         for (let Count = 0; Count < n; Count++) {
-          if (name == 'FootNoteSymbol_II') {
-            //console.log(name.match(/symbol/gi))
-            console.log(typeof valuesArr == 'object');
-          }
           if (name.match(/symbol/gi) && typeof valuesArr == 'object') {
-            //console.log(name);
             let newValue = this.label_Symbol(
-              _.M_SCOPE.CLONE_COPY['_' + name],
+              M_SCOPE.CLONE_COPY['_' + name],
               Count
             );
-            //console.log(newValue);
+
             if (M_SCOPE[name].indexOf(newValue) == -1) {
               M_SCOPE[name].push(newValue);
             }
           }
         }
       }
-      console.log(M_SCOPE.FootNoteSymbols);
+      console.log(M_SCOPE);
     } catch (err) {
       console.warn(err.message);
     }
